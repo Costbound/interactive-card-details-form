@@ -2,50 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
   <title>Frontend Mentor | Interactive card details form</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css">
+  <link rel="stylesheet" href="./css/styles.css">
+  <script src="./script.js" defer></script>
 </head>
 <body>
+  <div class="modal">
+    <div class="content-container">
+      <div class="modal__cards-container">
+        <div class="cards__card-back">
+          <div class="card-back__line"></div>
+          <div class="card-back__cvc-container">
+            <p class="card-back__cvc">000</p>
+          </div>
+        </div>
+        <div class="cards__card-front">
+          <div class="card-front__filled-circle"></div>
+          <div class="card-front__empty-circle"></div>
+          <p class="card-front__card-number"></p>
+          <div class="card-front__name-date-container">
+            <p class="name-date-container__name"></p>
+            <p class="name-date-container__date"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-container">
+      <form class="modal__form">
+        <label for="username" class="form__name-label lable-any">CARDHOLDER NAME
+          <input 
+            type="text"
+            class="form__name-input input-any"
+            name="username"
+            id="username"
+            placeholder="e.g. Jane Appleseed"
+            >
+        </label>
+        <label for="usercard" class="form__card-number-label lable-any">CARD NAME
+          <input 
+            type="tel"
+            class="form__card-number-input input-any"
+            name="usercard"
+            id="usercard"
+            placeholder="e.g. 1234-5678-9123-0000"
+           >
+        </label>
+        <div class="form__date-cvc-container">
+          <label for="card-month" class="form__month-lable lable-any">EXP.DATE
+            <input 
+              type="tel" 
+              class="form__month-input input-any"
+              name="card-month"
+              id="card-month"
+              placeholder="MM"
+              >
+          </label>
+          <label for="card-year" class="form__year-lable lable-any">(MM/YY)
+            <input 
+              type="tel" 
+              class="form__year-input input-any"
+              name="card-year"
+              id="card-year"
+              placeholder="YY"
+              >
+          </label>
+          <label for="card-cvc" class="form__cvc-lable lable-any">CVC
+            <input 
+              type="tel" 
+              class="form__cvc-input input-any"
+              name="card-cvc"
+              id="card-cvc"
+              placeholder="e.g. 123"
+              >
+          </label>
+        </div>
+        <button type="submit" class="form__submit-btn">Confirm</button>
+      </form>
+    </div>
+    <div class="modal__confirm-container">
+      <div class="content-container">
+        <svg class="confirm__icon" width="80" height="80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="40" fill="url(#a)" />
+          <path d="M28 39.92 36.08 48l16-16" stroke="#fff" stroke-width="3" />
+          <defs>
+            <linearGradient id="a" x1="-23.014" y1="11.507" x2="0" y2="91.507" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6348FE" offset="0"/>
+              <stop offset="1" stop-color="#610595" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <h2 class="confirm__title">THANK YOU!</h2>
+        <p class="confirm__para">We’ve added your card details</p>
+        <button type="button" class="confirm__btn">Continue</button>
+      </div>
+    </div>
+  </div>
 
-  0000 0000 0000 0000
-  Jane Appleseed
-  00/00
-
-  000
-
-  Cardholder Name
-  e.g. Jane Appleseed
-
-  Card Number
-  e.g. 1234 5678 9123 0000
-
-  Exp. Date (MM/YY)
-  MM
-  YY
-
-  CVC
-  e.g. 123
-
-  Confirm
-
-  <!-- Completed state start -->
-
-  Thank you!
-  We've added your card details
-  Continue
-  
   <div class="attribution">
     Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+    Coded by <a href="https://www.frontendmentor.io/profile/Costbound">Dmytro Popovskyi</a>.
   </div>
 </body>
 </html>
