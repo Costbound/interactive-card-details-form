@@ -124,6 +124,10 @@ p {
     text-align: right;
 }
 /* Compplete */
+.complete__icon {
+    margin: 0 auto;
+    margin-bottom: 35px;
+}
 .complete__thank-para {
     text-align: center;
     font-size: 28px;
@@ -225,10 +229,6 @@ p {
         width: 164px;
     }
     /* Complete */
-    .complete__icon {
-        margin: 0 auto;
-        margin-bottom: 35px;
-    }
 }
 @media (min-width: 1440px) {
     .modal {
@@ -236,6 +236,10 @@ p {
        max-height: 100vh; 
        display: flex;
     }
+    .button {
+        width: 381px;
+    }
+    /* Cards */
     .modal__cards-container {
         width: 483px;
         height: 100vh;
@@ -322,6 +326,13 @@ p {
     .form__cvc-lable {
         width: 191px;
     }
+    /* Complete */
+    .modal__complete-container {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 
@@ -329,9 +340,15 @@ p {
 .not-active {
     display: none;
 }
-.input-invalid,
-.input-invalid:focus {
+.not-valid,
+.not-valid:focus {
     border: 1px solid #FF5050;
+}
+.invalid-message {
+    color: #FF5050;
+    font-size: 12px;
+    text-transform: none;
+    letter-spacing: normal;
 }
 
 
