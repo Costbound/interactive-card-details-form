@@ -82,6 +82,9 @@ p {
     display: flex;
     justify-content: space-between;
 }
+.name-date-container__name {
+    overflow: hidden;
+}
 .name-date-container__date-caontainer {
     display: flex;
 }
