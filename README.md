@@ -34,7 +34,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://costbound.github.io/interactive-card-details-form/)
+- Live Site URL: [https://costbound.github.io/interactive-card-details-form/]
 
 ## My process
 
