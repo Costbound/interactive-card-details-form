@@ -63,13 +63,13 @@ const cardInputValidation = (evt) => {
     cardInput.value.length === 4 || cardInput.value.length === 9 || cardInput.value.length === 14 ? cardInput.value += " " :
         !cardInput.value.includes(" ") ? cardInput.setAttribute("maxlength", "16") :
             cardInput.setAttribute("maxlength", "19");
-    return (evt.keyCode > 47 && evt.keyCode < 57) || ((evt.keyCode === 32 || evt.keyCode === 45) && (cardInput.value.length === 4 || cardInput.value.length === 9 || cardInput.value.length === 14));
+    return (evt.keyCode > 47 && evt.keyCode < 58) || ((evt.keyCode === 32 || evt.keyCode === 45) && (cardInput.value.length === 4 || cardInput.value.length === 9 || cardInput.value.length === 14));
 }
 const numberInputValidation = (evt) => {
-    return evt.keyCode > 47 && evt.keyCode < 57;
+    return evt.keyCode > 47 && evt.keyCode < 58;
 }
 const noNumberInputValidation = (evt) => {
-    return !(evt.keyCode > 47 && evt.keyCode < 57);
+    return !(evt.keyCode > 47 && evt.keyCode < 58);
 }
 
 
