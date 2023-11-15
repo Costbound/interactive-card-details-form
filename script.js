@@ -1,4 +1,6 @@
+let date = new Date();
 const form = document.querySelector(".modal__form");
+const formContainer = document.querySelector(".modal__form-content-container")
 const completeContainer = document.querySelector(".modal__complete-container");
 // Input
 const nameInput = document.querySelector(".form__name-input");
@@ -11,7 +13,8 @@ const completeBtn = document.querySelector(".complete__btn");
 // Output
 const cardOutput = document.querySelector(".card-front__card-number");
 const nameOutput = document.querySelector(".name-date-container__name");
-const dateOutput = document.querySelector(".name-date-container__date");
+const monthOutput = document.querySelector(".name-date-container__month");
+const yearOutput = document.querySelector(".name-date-container__year");
 const cvcOutput = document.querySelector(".card-back__cvc");
 const nameLable = document.querySelector(".form__name-label");
 const cardLable = document.querySelector(".form__card-number-label");
@@ -24,9 +27,18 @@ const cardInvalidMessage = document.createElement("span");
 cardInvalidMessage.classList.add("invalid-message");
 const dateInvalidMessage = document.createElement("span");
 dateInvalidMessage.classList.add("invalid-message");
+dateInvalidMessage.style.width = "180px";
+const cvcInvalidMessage = document.createElement("span");
+cvcInvalidMessage.classList.add("invalid-message");
 
-
-
+// User accaunt////////////////////
+const user = {
+    username: "username",
+    password: "password",
+    email: "example@email.com",
+    cards: []
+}
+// ///////////////////////////////
 form.addEventListener("submit", evt => {
     evt.preventDefault();
     formValidation();
@@ -34,64 +46,98 @@ form.addEventListener("submit", evt => {
 completeBtn.addEventListener("click", () => {
     form.classList.remove("not-active");
     completeContainer.classList.add("not-active");
-})
+    nameOutput.textContent = "Jane Appleseed";
+    cardOutput.textContent = "0000 0000 0000 0000";
+    monthOutput.textContent = "00/";
+    yearOutput.textContent = "00";
+    cvcOutput.textContent = "000";
+    form.reset();
+});
+nameInput.addEventListener("input", () => { nameOutput.textContent = nameInput.value });
+cardInput.addEventListener("input", () => { cardOutput.textContent = cardInput.value });
+monthInput.addEventListener("input", () => { monthOutput.textContent = monthInput.value + "/" });
+yearInput.addEventListener("input", () => { yearOutput.textContent = yearInput.value });
+cvcInput.addEventListener("input", () => { cvcOutput.textContent = cvcInput.value });
 
 const cardInputValidation = (evt) => {
-    if (cardInput.value.length === 4 || cardInput.value.length === 9 || cardInput.value.length === 14) {
-        cardInput.value += " "; 
-    } else if (!cardInput.value.includes(" ")) {
-        cardInput.setAttribute("maxlength", "16");
-    } else {
-        cardInput.setAttribute("maxlength", "19");
-    }
-    return !(evt.keyCode < 48 || evt.keyCode > 57) || ((evt.keyCode === 32 || evt.keyCode === 45) && (cardInput.value.length === 4 || cardInput.value.length === 9 || cardInput.value.length === 14));
+    cardInput.value.length === 4 || cardInput.value.length === 9 || cardInput.value.length === 14 ? cardInput.value += " " :
+        !cardInput.value.includes(" ") ? cardInput.setAttribute("maxlength", "16") :
+            cardInput.setAttribute("maxlength", "19");
+    return (evt.keyCode > 47 && evt.keyCode < 57) || ((evt.keyCode === 32 || evt.keyCode === 45) && (cardInput.value.length === 4 || cardInput.value.length === 9 || cardInput.value.length === 14));
 }
-function formValidation() {
+const numberInputValidation = (evt) => {
+    return evt.keyCode > 47 && evt.keyCode < 57;
+}
+const noNumberInputValidation = (evt) => {
+    return !(evt.keyCode > 47 && evt.keyCode < 57);
+}
+
+
+const formValidation = () => {
     nameValidation();
-    cardValidation()
-    if (nameValidation() && cardValidation()) {
+    cardValidation();
+    dateValidation(monthInput);
+    dateValidation(yearInput);
+    cvcValidation();
+    if (nameValidation() && cardValidation() && dateValidation(monthInput) && dateValidation(yearInput) && cvcValidation()) {
         form.classList.add("not-active");
         completeContainer.classList.remove("not-active");
+        user.cards.push(new Card());
     }
 }
-function nameValidation() {
-    if (nameInput.value.length === 0) {
-        nameInput.classList.add("not-valid");
-        nameInvalidMessage.textContent = "This field can't be blank";
-        nameLable.appendChild(nameInvalidMessage);
-        return false;
-    } else if (!nameInput.value.match(/[a-zA-Z'?]+\s[a-zA-z'?]+/i)) {
-        nameInput.classList.add("not-valid");
-        nameInvalidMessage.textContent = "Enter correct name (e.g. Name Surname)";
-        nameLable.appendChild(nameInvalidMessage);
-        return false;
-    } else {
-        nameInput.classList.remove("not-valid");
-        nameInvalidMessage.remove();
-        return true;
-    }
+const nameValidation = () => {
+    return nameInput.value.length === 0 ? inputEmpty(nameInput, nameLable, nameInvalidMessage) :
+        !nameInput.value.match(/^[a-z'?]+\s[a-z'?]+$/i) ? inputInvalid(nameInput, nameLable, nameInvalidMessage, "Enter correct name (e.g. Name Surname)") :
+            inputValid(nameInput, nameLable, nameInvalidMessage);
 }
-function cardValidation() {
-    const match = cardInput.value.match(/\d/g).length || [];
-    if (cardInput.value.length === 0) {
-        cardInput.classList.add("not-valid");
-        cardInvalidMessage.textContent = "This field can't be blank";
-        cardLable.append(cardInvalidMessage);
-        return false;
-    } else if (match < 16) {
-        cardInput.classList.add("not-valid");
-        cardInvalidMessage.textContent = "Enter correct card number (e.g. 0000 0000 0000 0000)";
-        cardLable.append(cardInvalidMessage);
-        return false;
-    } else {
-        cardInput.classList.remove("not-valid");
-        cardInvalidMessage.remove();
-        return true;
-    }
+const cardValidation = () => {
+    const match = cardInput.value.match(/\d/g) || [];
+    return cardInput.value.length === 0 ? inputEmpty(cardInput, cardLable, cardInvalidMessage) :
+        match.length < 16 ? inputInvalid(cardInput, cardLable, cardInvalidMessage, "Enter correct card number (e.g. 0000 0000 0000 0000)") :
+            inputValid(cardInput, cardLable, cardInvalidMessage);
 }
-function dateValidation(input) {
-    const match = input.value.match(/\d\d/).length || [];
-    if (match < 2) {
-        input
+const dateValidation = (dateInput) => {
+    const match = dateInput.value.match(/\d/g) || [];
+    const year = Number(20 + yearInput.value);
+    return dateInput.value.length === 0 ? inputEmpty(dateInput, dateLable, dateInvalidMessage) :
+        match.length < 2 ? inputInvalid(dateInput, dateLable, dateInvalidMessage, "Enter correct date (e.g. 05 27)") :
+            Number(monthInput.value) > 12 ? inputInvalid(dateInput, dateLable, dateInvalidMessage, "Month can't be more than 12") :
+                year < date.getFullYear() || (year <= date.getFullYear() && Number(monthInput.value) < (date.getMonth() + 2)) ?
+                    inputInvalid(dateInput, dateLable, dateInvalidMessage, "Your card is expired") :
+                    inputValid(dateInput, dateLable, dateInvalidMessage);
+}
+const cvcValidation = () => {
+    const match = cvcInput.value.match(/\d/g) || [];
+    return cvcInput.value.length === 0 ? inputEmpty(cvcInput, cvcLable, cvcInvalidMessage) :
+        match.length < 3 ? inputInvalid(cvcInput, cvcLable, cvcInvalidMessage, "Enter correct cvc number (e.g. 123)") :
+            inputValid(cvcInput, cvcLable, cvcInvalidMessage);
+}
+
+const inputEmpty = (input, lable, message) => {
+    input.classList.add("not-valid");
+    message.textContent = "This field can't be blank";
+    lable.append(message);
+    lable.style.maxHeight = "100px";
+}
+const inputInvalid = (input, lable, message, text) => {
+    input.classList.add("not-valid");
+    message.textContent = text;
+    lable.append(message);
+    lable.style.maxHeight = "100px";
+}
+const inputValid = (input, lable, message) => {
+    input.classList.remove("not-valid");
+    message.remove();
+    lable.style.maxHeight = "";
+    return true;
+}
+
+class Card {
+    constructor() {
+        this.firstName = nameInput.value.split(" ").shift().toString().toLowerCase();
+        this.surname = nameInput.value.split(" ").pop().toString().toLowerCase();
+        this.cardNumber = cardInput.value.match(/\d/g).join("");
+        this.expDate = monthInput.value + yearInput.value;
+        this.cvc = cvcInput.value;
     }
 }

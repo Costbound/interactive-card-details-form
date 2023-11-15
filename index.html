@@ -32,24 +32,28 @@
             <p class="card-front__card-number">0000 0000 0000 0000</p>
             <div class="card-front__name-date-container">
               <p class="name-date-container__name">Jane Appleseed</p>
-              <p class="name-date-container__date">00/00</p>
+              <div class="name-date-container__date-caontainer">
+                <p class="name-date-container__month">00/</p>
+                <p class="name-date-container__year">00</p>
+              </div>
           </div>
         </div>
       </div>
       
       <form class="modal__form">
         <div class="content-container modal__form-content-container">
-          <label for="username" class="form__name-label lable-any">Cardholder Name
+          <label for="username" class="form__name-label lable-any">Cardholder Name *
             <input 
               type="text"
               class="form__name-input input-any"
               name="username"
               id="username"
               placeholder="e.g. Jane Appleseed"
+              onkeypress="return noNumberInputValidation(event)"
               autofocus
               >
           </label>
-          <label for="usercard" class="form__card-number-label lable-any">Card Name
+          <label for="usercard" class="form__card-number-label lable-any">Card Name *
             <input 
               type="tel"
               class="form__card-number-input input-any"
@@ -70,9 +74,10 @@
                   id="card-month"
                   placeholder="MM"
                   maxlength="2"
+                  onkeypress="return numberInputValidation(event)"
                   >
               </label>
-              <label for="card-year" class="form__date-lable lable-any">(MM/YY)
+              <label for="card-year" class="form__date-lable lable-any">(MM/YY)*
                 <input 
                   type="tel" 
                   class="form__year-input input-any"
@@ -80,10 +85,11 @@
                   id="card-year"
                   placeholder="YY"
                   maxlength="2"
+                  onkeypress="return numberInputValidation(event)"
                   >
               </label>
             </div>
-            <label for="card-cvc" class="form__cvc-lable lable-any">CVC
+            <label for="card-cvc" class="form__cvc-lable lable-any">CVC *
               <input 
                 type="tel" 
                 class="form__cvc-input input-any"
@@ -91,6 +97,7 @@
                 id="card-cvc"
                 placeholder="e.g. 123"
                 maxlength="3"
+                onkeypress="return numberInputValidation(event)"
                 >
             </label>
           </div>

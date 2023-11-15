@@ -22,13 +22,8 @@ p {
     border-radius: 8px;
     background-color: var(--Deep-Violet, #21092F);
     color: #FFF;
-    font-family: "Space Grotesk";
-    font-size: 18px;
-    font-weight: 500;
-    display: flex;
-    justify-content: center;
-    padding-top: 15px;padding-bottom: 15px;
     border: none;
+    cursor: pointer;
     transition: background-color 250ms;
 }
 .button:hover {
@@ -37,11 +32,11 @@ p {
 .backdrop {
     width: 100%;
     height: 100%;
-    background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
+    background-color: #2f2f2f1a;
     top: 0;
     left: 0;
 }
@@ -58,7 +53,6 @@ p {
 .modal__cards-container {
     color: #FFF;
     background-color: #21092F;
-    width: 100%;
 }
 .cards__card-back {
     background-image: linear-gradient(169deg, #FFF 5%, #D2D3D9 91.69%);
@@ -81,9 +75,15 @@ p {
         linear-gradient(164deg, #6348FE 4.74%, #610595 88.83%);
     background-size: cover;
 }
+.card-front__card-number {
+    text-align: center;
+}
 .card-front__name-date-container {
     display: flex;
     justify-content: space-between;
+}
+.name-date-container__date-caontainer {
+    display: flex;
 }
 
 /* Form */
@@ -93,13 +93,16 @@ p {
     display: flex;
     flex-direction: column;
     gap: 9px;
+    max-height: 68px;
+    transition: max-height 250ms;
 }
 .modal__form-content-container {
     display: flex;
     flex-direction: column;
 }
 .input-any {
-    height: 45px;
+    display: block;
+    min-height: 45px;
     outline: none;
     border-radius: 8px;
     border: 1px solid #DFDEE0;
@@ -114,16 +117,15 @@ p {
     color: var(--Deep-Violet, #21092F);
     opacity: 0.25;
 }
+.form__name-input {
+    text-transform: capitalize;
+}
 .form__date-cvc-container {
     display: flex;
 }
 .form__date-container {
     display: flex;
 }
-.form__date-lable:first-child {
-    text-align: right;
-}
-/* Compplete */
 .complete__icon {
     margin: 0 auto;
     margin-bottom: 35px;
@@ -145,15 +147,18 @@ p {
 @media (max-width: 1439px) {
     .modal {
         width: 375px;
-        height: 704px;
+        min-height: 704px;
+        border-radius: 10px;
+        height: auto;
     }
     .content-container:not(.modal__cards-container) {
         width: 327px;
     }
     .button {
         width: 327px;
+        margin-bottom: 45px;
     }
-
+    /* Form */ 
     /* Cards */
     .modal__cards-container {
         padding-top: 32px;
@@ -161,6 +166,7 @@ p {
         height: 240px;
         background-image: url(../images/bg-main-mobile.png);
         background-repeat: no-repeat;
+        border-radius: 10px 10px 0 0;
     }
     .cards__card-back {
         width: 286px;
@@ -181,10 +187,8 @@ p {
         width: 231px;
         height: 30px;
         padding-right: 11px;
-        text-align: right;
         font-size: 9px;
         letter-spacing: 1.286px;
-        text-transform: uppercase;
     }
     .cards__card-front {
         width: 285px;
@@ -268,9 +272,7 @@ p {
     .card-back__cvc-container {
         width: 361px;
         height: 38px;
-        padding: 10px 16px;
-        color: var(--White, #FFF);
-        text-align: right;
+        padding-right: 16px;
         font-size: 14px;
         letter-spacing: 2px;
         margin-bottom: 33px;
@@ -308,7 +310,6 @@ p {
     }
     .modal__form-content-container {
         width: 381px;
-        height: 352px;
         gap: 26px;
     }
     .form__date-cvc-container {
@@ -345,13 +346,13 @@ p {
     border: 1px solid #FF5050;
 }
 .invalid-message {
+    display: block;
     color: #FF5050;
     font-size: 12px;
     text-transform: none;
     letter-spacing: normal;
+    text-align: left;
 }
-
-
 
 
 
