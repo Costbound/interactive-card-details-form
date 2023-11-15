@@ -56,7 +56,7 @@ p {
 }
 .cards__card-back {
     background-image: linear-gradient(169deg, #FFF 5%, #D2D3D9 91.69%);
-    box-shadow: 7px 46px 44px rgba(0, 0, 0, 0.15);
+    box-shadow: 7px 20px 44px rgba(0, 0, 0, 0.15);
 }
 .card-back__line {
     width: 100%;
@@ -75,7 +75,7 @@ p {
         url(../images/bg-card-front.png),
         linear-gradient(164deg, #6348FE 4.74%, #610595 88.83%);
     background-size: cover;
-    box-shadow: 7px 46px 44px rgba(0, 0, 0, 0.15);
+    box-shadow: 7px 20px 44px rgba(0, 0, 0, 0.15);
 }
 .card-front__card-number {
     text-align: center;
