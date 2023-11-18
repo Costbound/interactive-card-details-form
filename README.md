@@ -33,7 +33,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [[Add solution URL here](https://www.frontendmentor.io/solutions/adaptive-card-details-modal-form-with-validation-Vcbq14HPKq)]
+- Solution URL: [https://www.frontendmentor.io/solutions/adaptive-card-details-modal-form-with-validation-Vcbq14HPKq]
 - Live Site URL: [https://costbound.github.io/interactive-card-details-form/]
 
 ## My process
